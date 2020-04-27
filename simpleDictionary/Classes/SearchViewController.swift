@@ -17,6 +17,26 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        
+        let tableHeaderLabel = UILabel()
+        tableHeaderLabel.text = "Recent"
+        
+        let tableHeaderButton = UIButton(type: UIButton.ButtonType.system)
+        tableHeaderButton.setTitle("Clear", for: UIControl.State.normal)
+        
+        let tableHeader = UIStackView(arrangedSubviews: [tableHeaderLabel, tableHeaderButton])
+        tableHeader.axis = .horizontal
+        tableHeader.distribution = .fillProportionally
+        tableHeader.alignment = .fill
+//        tableHeader.spacing = 5
+        tableHeader.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(tableHeader)
+        tableHeader.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        tableHeader.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 20).isActive = true
+        tableHeader.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        recentSearchedTableView.tableHeaderView = tableHeader
     }
     
     func setupNavBar() {
@@ -38,24 +58,9 @@ class SearchViewController: UIViewController {
 
 }
 
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    // MARK: - recentSearchedTableView
-    
-    // Define rows for recentSearchedTableView based on array TEMP
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searched.count
-    }
-    
-    // Define cells for recentSearchedTableView based on array TEMP
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recentSearched", for: indexPath)
-        
-        cell.textLabel!.text = searched[indexPath.item]
-        
-        return cell
-    }
-    
+// MARK: - recentSearchedTableView
+
+extension SearchViewController: UITableViewDelegate {
     // When the row is selected perform the segue to the details view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "searchedDetails", sender: nil)
@@ -68,5 +73,20 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             recentSearchedTableView.deselectRow(at: selectedIndexPath, animated: animated)
         }
     }
+}
+
+extension SearchViewController: UITableViewDataSource {
+    // Define rows for recentSearchedTableView based on array TEMP
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searched.count
+    }
     
+    // Define cells for recentSearchedTableView based on array TEMP
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recentSearched", for: indexPath)
+        
+        cell.textLabel!.text = searched[indexPath.row]
+        
+        return cell
+    }
 }

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		434D499C2450EF7A00C984B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D499B2450EF7A00C984B2 /* SearchViewController.swift */; };
 		434D499E2450F02000C984B2 /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434D499D2450F02000C984B2 /* DiscoveryViewController.swift */; };
+		43B303402451947B00C0DD4B /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3033F2451947B00C0DD4B /* WordViewController.swift */; };
+		43B3034224519D1E00C0DD4B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3034124519D1E00C0DD4B /* Word.swift */; };
+		43B303442451A27900C0DD4B /* WordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B303432451A27900C0DD4B /* WordRequest.swift */; };
 		43FE83E62450DFBC00D0D1D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FE83E52450DFBC00D0D1D3 /* AppDelegate.swift */; };
 		43FE83E82450DFBC00D0D1D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FE83E72450DFBC00D0D1D3 /* SceneDelegate.swift */; };
 		43FE83EA2450DFBC00D0D1D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FE83E92450DFBC00D0D1D3 /* ViewController.swift */; };
@@ -24,6 +27,9 @@
 /* Begin PBXFileReference section */
 		434D499B2450EF7A00C984B2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		434D499D2450F02000C984B2 /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
+		43B3033F2451947B00C0DD4B /* WordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
+		43B3034124519D1E00C0DD4B /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		43B303432451A27900C0DD4B /* WordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRequest.swift; sourceTree = "<group>"; };
 		43FE83E22450DFBC00D0D1D3 /* simpleDictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleDictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43FE83E52450DFBC00D0D1D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43FE83E72450DFBC00D0D1D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +60,7 @@
 			children = (
 				434D499D2450F02000C984B2 /* DiscoveryViewController.swift */,
 				434D499B2450EF7A00C984B2 /* SearchViewController.swift */,
+				43B3033F2451947B00C0DD4B /* WordViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -79,6 +86,8 @@
 			children = (
 				43FE83E52450DFBC00D0D1D3 /* AppDelegate.swift */,
 				43FE83E72450DFBC00D0D1D3 /* SceneDelegate.swift */,
+				43B3034124519D1E00C0DD4B /* Word.swift */,
+				43B303432451A27900C0DD4B /* WordRequest.swift */,
 				434D499A2450EF4A00C984B2 /* Classes */,
 				43FE83E92450DFBC00D0D1D3 /* ViewController.swift */,
 				43FE83EB2450DFBC00D0D1D3 /* Main.storyboard */,
@@ -176,8 +185,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				434D499C2450EF7A00C984B2 /* SearchViewController.swift in Sources */,
+				43B3034224519D1E00C0DD4B /* Word.swift in Sources */,
 				434D499E2450F02000C984B2 /* DiscoveryViewController.swift in Sources */,
+				43B303402451947B00C0DD4B /* WordViewController.swift in Sources */,
 				43FE83EA2450DFBC00D0D1D3 /* ViewController.swift in Sources */,
+				43B303442451A27900C0DD4B /* WordRequest.swift in Sources */,
 				43FE83F02450DFBC00D0D1D3 /* simpleDictionary.xcdatamodeld in Sources */,
 				43FE83E62450DFBC00D0D1D3 /* AppDelegate.swift in Sources */,
 				43FE83E82450DFBC00D0D1D3 /* SceneDelegate.swift in Sources */,
