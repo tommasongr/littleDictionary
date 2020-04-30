@@ -12,49 +12,77 @@ class SearchViewController: UIViewController {
 
     @IBOutlet var recentSearchedTableView: UITableView!
     
-    var searched: [String] = ["Hello", "Hola", "Good Morning", "Ciao"]
+    var searched: [Word] = []
+    var searchingResults: [Word] = []
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    // Computed props for searching
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
         
-        let tableHeaderLabel = UILabel()
-        tableHeaderLabel.text = "Recent"
+        let request = WordRequest()
+        var response: Word?
         
-        let tableHeaderButton = UIButton(type: UIButton.ButtonType.system)
-        tableHeaderButton.setTitle("Clear", for: UIControl.State.normal)
+        request.requestWords(word: "cat", completionHandler: {entries in
+            
+            response = entries[0]
+            
+            if let res = response {
+                self.searched.append(res)
+            }
+        })
         
-        let tableHeader = UIStackView(arrangedSubviews: [tableHeaderLabel, tableHeaderButton])
-        tableHeader.axis = .horizontal
-        tableHeader.distribution = .fillProportionally
-        tableHeader.alignment = .fill
-//        tableHeader.spacing = 5
-        tableHeader.translatesAutoresizingMaskIntoConstraints = false
+//        let tableHeaderLabel = UILabel()
+//        tableHeaderLabel.text = "Recent"
+//
+//        let tableHeaderButton = UIButton(type: UIButton.ButtonType.system)
+//        tableHeaderButton.setTitle("Clear", for: UIControl.State.normal)
+//
+//        let tableHeader = UIStackView(arrangedSubviews: [tableHeaderLabel, tableHeaderButton])
+//        tableHeader.axis = .horizontal
+//        tableHeader.distribution = .fillProportionally
+//        tableHeader.alignment = .fill
+//        tableHeader.translatesAutoresizingMaskIntoConstraints = false
+//
+//        view.addSubview(tableHeader)
+//        tableHeader.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+//        tableHeader.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 20).isActive = true
+//        tableHeader.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
-        view.addSubview(tableHeader)
-        tableHeader.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        tableHeader.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 20).isActive = true
-        tableHeader.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        recentSearchedTableView.tableHeaderView = tableHeader
+//        recentSearchedTableView.tableHeaderView = tableHeader
     }
     
     func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let searchController = UISearchController(searchResultsController: nil)
+        // Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for a word"
+        
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        definesPresentationContext = true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "searchedDetails" {
+            let destVC = segue.destination as! WordViewController
+            destVC.word = sender as? Word
+        }
     }
-    */
 
 }
 
@@ -63,7 +91,8 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITableViewDelegate {
     // When the row is selected perform the segue to the details view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "searchedDetails", sender: nil)
+        let word = searched[indexPath.row]
+        performSegue(withIdentifier: "searchedDetails", sender: word)
     }
     
     // Deselect row after segue with animation
@@ -78,6 +107,10 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UITableViewDataSource {
     // Define rows for recentSearchedTableView based on array TEMP
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return searchingResults.count
+        }
+        
         return searched.count
     }
     
@@ -85,8 +118,45 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recentSearched", for: indexPath)
         
-        cell.textLabel!.text = searched[indexPath.row]
+        let word: Word
+        
+        if isFiltering {
+          word = searchingResults[indexPath.row]
+        } else {
+          word = searched[indexPath.row]
+        }
+        
+        cell.textLabel!.text = word.entry.capitalized
         
         return cell
+    }
+}
+
+// MARK: - Search Result Updating
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        let searchBar = searchController.searchBar
+        
+        if isSearchBarEmpty == false {
+            let request = WordRequest()
+            
+            searchingResults = []
+            
+            request.requestWords(word: searchBar.text!, completionHandler: {entries in
+                
+                for word in entries {
+                    print(word.entry)
+                    self.searchingResults.append(word)
+                    
+                    DispatchQueue.main.async {
+                        self.recentSearchedTableView.reloadData()
+                    }
+                }
+                
+            })
+        }
+        
+        
     }
 }

@@ -47,6 +47,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="discoveryTableView" destination="07S-0e-UoI" id="29Q-rM-8ng"/>
+                        <segue destination="5Hs-yW-lxc" kind="show" identifier="discoveryWord" id="8DE-Pk-Eiw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pRV-aM-fCa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -71,6 +72,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTn-E5-CDo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1539.1304347826087" y="589.95535714285711"/>
+        </scene>
+        <!--Word-->
+        <scene sceneID="SVT-ew-vcU">
+            <objects>
+                <viewController id="5Hs-yW-lxc" customClass="WordViewController" customModule="simpleDictionary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zAa-kn-VLt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FpA-dS-UCi">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xMv-bd-TJg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
+                                        <subviews>
+                                            <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9W-Vd-c97">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="600" id="4Tn-ru-M9Y"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tin-5S-R3q">
+                                                <rect key="frame" x="0.0" y="600" width="375" height="600"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="600" id="qC1-ZB-6mJ"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="xMv-bd-TJg" firstAttribute="bottom" secondItem="bXt-15-5s5" secondAttribute="bottom" id="2Mu-NR-ukp"/>
+                                    <constraint firstItem="xMv-bd-TJg" firstAttribute="top" secondItem="bXt-15-5s5" secondAttribute="top" id="CGS-gU-ckO"/>
+                                    <constraint firstItem="xMv-bd-TJg" firstAttribute="trailing" secondItem="bXt-15-5s5" secondAttribute="trailing" id="Jch-oh-T0e"/>
+                                    <constraint firstItem="xMv-bd-TJg" firstAttribute="leading" secondItem="bXt-15-5s5" secondAttribute="leading" id="hn5-Dq-NXP"/>
+                                    <constraint firstItem="xMv-bd-TJg" firstAttribute="width" secondItem="hYP-75-8zp" secondAttribute="width" id="mnW-r7-Xfm"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="bXt-15-5s5"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="hYP-75-8zp"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="phW-WT-P5f" firstAttribute="trailing" secondItem="FpA-dS-UCi" secondAttribute="trailing" id="4Qa-gh-pZO"/>
+                            <constraint firstItem="phW-WT-P5f" firstAttribute="bottom" secondItem="FpA-dS-UCi" secondAttribute="bottom" id="UPp-OW-Cbt"/>
+                            <constraint firstItem="FpA-dS-UCi" firstAttribute="top" secondItem="phW-WT-P5f" secondAttribute="top" id="uOx-EU-TVA"/>
+                            <constraint firstItem="FpA-dS-UCi" firstAttribute="leading" secondItem="phW-WT-P5f" secondAttribute="leading" id="ysW-IU-Iea"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="phW-WT-P5f"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Word" id="jlp-LY-Xpl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xdv-XR-OzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="272.80000000000001" y="589.65517241379314"/>
         </scene>
     </scenes>
     <resources>

@@ -24,7 +24,7 @@ class DiscoveryViewController: UIViewController {
             "x-rapidapi-key": "67fd5cf601msh382ba30a8182f55p16125ajsnc4de5a346fb0"
         ]
         
-        let request = NSMutableURLRequest(url: NSURL(string: "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/a")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "https://lingua-robot.p.rapidapi.com/language/v1/entries/en/example")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
         request.httpMethod = "GET"
@@ -54,7 +54,7 @@ class DiscoveryViewController: UIViewController {
             
             self.words = json.entries
             
-            print(json)
+//            print(json)
             
             DispatchQueue.main.async {
                 self.discoveryTableView.reloadData()
@@ -68,12 +68,32 @@ class DiscoveryViewController: UIViewController {
     func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "discoveryWord" {
+            let destVC = segue.destination as! WordViewController
+            destVC.word = sender as? Word
+        }
+    }
 }
 
 // MARK: - discoveryTableView
 
 extension DiscoveryViewController: UITableViewDelegate {
+    // When the row is selected perform the segue to the details view
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let word = words[indexPath.row]
+        performSegue(withIdentifier: "discoveryWord", sender: word)
+    }
     
+    // Deselect row after segue with animation
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectedIndexPath = discoveryTableView.indexPathForSelectedRow {
+            discoveryTableView.deselectRow(at: selectedIndexPath, animated: animated)
+        }
+    }
 }
 
 extension DiscoveryViewController: UITableViewDataSource {

@@ -54,7 +54,7 @@
             </objects>
             <point key="canvasLocation" x="160.86956521739131" y="589.95535714285711"/>
         </scene>
-        <!--Word View Controller-->
+        <!--Word-->
         <scene sceneID="Dv6-GM-tMw">
             <objects>
                 <viewController id="6JP-7O-Hd6" customClass="WordViewController" customModule="simpleDictionary" customModuleProvider="target" sceneMemberID="viewController">
@@ -62,12 +62,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1D-t8-g2N">
-                                <rect key="frame" x="20" y="108" width="69.5" height="33"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWf-Tc-and">
                                 <rect key="frame" x="20" y="169" width="374" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -76,20 +70,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tN6-JF-CQX">
-                                <rect key="frame" x="206" y="481" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="k1D-t8-g2N" firstAttribute="leading" secondItem="NqJ-hZ-VbH" secondAttribute="leading" constant="20" id="NyR-2U-nq8"/>
-                            <constraint firstItem="k1D-t8-g2N" firstAttribute="top" secondItem="NqJ-hZ-VbH" secondAttribute="top" constant="20" id="XLv-fN-Our"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="NqJ-hZ-VbH"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bMH-Rd-OVY"/>
+                    <navigationItem key="navigationItem" title="Word" id="bMH-Rd-OVY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vQC-Sh-Tac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
