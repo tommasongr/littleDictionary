@@ -13,7 +13,6 @@ class SearchViewController: UIViewController {
     @IBOutlet var recentSearchedTableView: UITableView!
     
     var searched: [Word] = []
-    var searchingResults: [Word] = []
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -29,6 +28,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        
+        searchController.searchBar.delegate = self
         
         let request = WordRequest()
         var response: Word?
@@ -66,7 +67,6 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         // Search Controller
-        searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for a word"
         
@@ -107,10 +107,6 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UITableViewDataSource {
     // Define rows for recentSearchedTableView based on array TEMP
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return searchingResults.count
-        }
-        
         return searched.count
     }
     
@@ -120,11 +116,7 @@ extension SearchViewController: UITableViewDataSource {
         
         let word: Word
         
-        if isFiltering {
-          word = searchingResults[indexPath.row]
-        } else {
-          word = searched[indexPath.row]
-        }
+        word = searched[indexPath.row]
         
         cell.textLabel!.text = word.entry.capitalized
         
@@ -133,21 +125,27 @@ extension SearchViewController: UITableViewDataSource {
 }
 
 // MARK: - Search Result Updating
-extension SearchViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
+//extension SearchViewController: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+//
+//        let searchBar = searchController.searchBar
+//
+//    }
+//}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        let searchBar = searchController.searchBar
-        
-        if isSearchBarEmpty == false {
+        if isFiltering {
             let request = WordRequest()
             
-            searchingResults = []
+            searched = []
             
             request.requestWords(word: searchBar.text!, completionHandler: {entries in
                 
                 for word in entries {
                     print(word.entry)
-                    self.searchingResults.append(word)
+                    self.searched.append(word)
                     
                     DispatchQueue.main.async {
                         self.recentSearchedTableView.reloadData()
@@ -156,7 +154,6 @@ extension SearchViewController: UISearchResultsUpdating {
                 
             })
         }
-        
         
     }
 }
